@@ -1,0 +1,54 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="flipperButton" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">@dimen/flipper_button_height_width</item>
+        <item name="android:layout_height">@dimen/flipper_button_height_width</item>
+        <item name="android:textSize">@dimen/flipper_button_text_size</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:background">@drawable/button</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:onClick">ShowThing</item>
+    </style>
+
+    <style name="flipperButton_on" parent="flipperButton">
+        <item name="android:background">@drawable/button_on</item>
+        <item name="android:textColor">@color/androidColor</item>
+    </style>
+
+    <style name="flipperLayout" parent="Theme.AppCompat.Light">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">match_parent</item>
+    </style>
+
+    <style name="flipperLayout.textView" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentTop">true</item>
+        <item name="android:layout_margin">@dimen/flipper_text_view_margin</item>
+        <item name="android:textSize">@dimen/flipper_text_view_text_size</item>
+    </style>
+
+    <style name="flipperLayout.imageView" parent="Theme.AppCompat.Light">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+    </style>
+
+</resources>

@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">FiveThings</string>
+    <string name="action_settings">Settings</string>
+    <string name="thing_1">אנדרואיד היא מערכת הפעלה מבוססת לינוקס המיועדת לסמארטפונים, טאבלטים, טלוויזיות חכמות, שעונים חכמים ומכוניות.</string>
+    <string name="thing_2">החל משנת 2010 אנדרואיד היא מערכת ההפעלה הנפוצה ביותר לטלפונים חכמים</string>
+    <string name="thing_3">Google לא המציאה את אנדרואיד. היא קנתה אותה מחברת סטארט-אפ קטנה שרצתה לפתח מערכת הפעלה למצלמות.</string>
+    <string name="thing_4">כל גרסאות מערכת ההפעלה של אנדרואיד קיבלו שמות של קינוחים, ומסודרות לפי סדר ה-ABC</string>
+    <string name="thing_5">הקוד של אנדרואיד הוא קוד פתוח תחת רישיון ציבורי וזמין להורדה באינטרנט.</string>
+    <string name="fiveThingsHeader">5 דברים שלא ידעת על</string>
+    <string name="start">התחל</string>
+    <string name="one" translatable="false">1</string>
+    <string name="two" translatable="false">2</string>
+    <string name="three" translatable="false">3</string>
+    <string name="four" translatable="false">4</string>
+    <string name="five" translatable="false">5</string>
+</resources>
