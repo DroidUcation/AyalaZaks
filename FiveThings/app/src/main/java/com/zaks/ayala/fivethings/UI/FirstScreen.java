@@ -1,14 +1,15 @@
-package com.zaks.ayala.fivethings;
+package com.zaks.ayala.fivethings.UI;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.zaks.ayala.fivethings.Data.DBHelper;
+import com.zaks.ayala.fivethings.R;
 
 public class FirstScreen extends AppCompatActivity {
 
@@ -16,6 +17,7 @@ public class FirstScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_screen);
+
 
     }
 
@@ -42,7 +44,7 @@ public class FirstScreen extends AppCompatActivity {
     }
 
     public void start5things(View view) {
-        Intent intent= new Intent(this, fiveThingsList.class);
+        Intent intent = new Intent(this, fiveThingsList.class);
         startActivity(intent);
     }
 }

@@ -1,15 +1,23 @@
-package com.zaks.ayala.fivethings;
+package com.zaks.ayala.fivethings.UI;
 
+import android.database.Cursor;
 import android.graphics.Color;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.Animation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.ViewFlipper;
+
+import com.zaks.ayala.fivethings.Data.FactsContract;
+import com.zaks.ayala.fivethings.Data.FactsProvider;
+import com.zaks.ayala.fivethings.R;
 
 
 public class fiveThingsList extends AppCompatActivity {
@@ -18,16 +26,37 @@ public class fiveThingsList extends AppCompatActivity {
     private float lastX;
     Button lastButton;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_five_things_list);
         buttons = (LinearLayout) findViewById(R.id.buttons);
         flipper = (ViewFlipper) findViewById(R.id.flipper);
+        fillDataFromDB();
         flipper.setInAnimation(this, R.anim.left_in);
         flipper.setOutAnimation(this, R.anim.right_out);
         BindAnimations();
         lastButton = (Button) buttons.getChildAt(0);
+
+    }
+
+    private void fillDataFromDB() {
+        String URL = "content://com.zaks.ayala.provider.facts/items";
+        Uri uri = Uri.parse(URL);
+        Cursor c = getContentResolver().query(uri, null, null, null, FactsContract.FactsEntry.COLUMN_ORDER);
+        if (c.moveToFirst()) {
+            do {
+                Integer index = c.getInt(c.getColumnIndexOrThrow(FactsContract.FactsEntry.COLUMN_ORDER));
+                String text = c.getString(c.getColumnIndexOrThrow(FactsContract.FactsEntry.COLUMN_TEXT));
+                int image = c.getInt(c.getColumnIndexOrThrow(FactsContract.FactsEntry.COLUMN_IMAGE));
+                ((Button) buttons.getChildAt(index - 1)).setText(index.toString());
+                RelativeLayout l = (RelativeLayout) flipper.getChildAt(index - 1);
+                ((TextView) l.getChildAt(0)).setText(text);
+                ((ImageView) l.getChildAt(1)).setImageDrawable(getResources().getDrawable(image));
+            } while (c.moveToNext());
+
+        }
 
     }
 

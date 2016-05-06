@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.zaks.ayala.fivethings.fiveThingsList">
+    tools:context=".UI.fiveThingsList">
 
     <LinearLayout
         android:id="@+id/buttons"
@@ -22,23 +22,18 @@
         android:weightSum="5">
 
         <Button
-            android:text="@string/one"
             style="@style/flipperButton_on" />
 
         <Button
-            android:text="@string/two"
             style="@style/flipperButton" />
 
         <Button
-            android:text="@string/three"
             style="@style/flipperButton" />
 
         <Button
-            android:text="@string/four"
             style="@style/flipperButton" />
 
         <Button
-            android:text="@string/five"
             style="@style/flipperButton" />
     </LinearLayout>
 
@@ -51,56 +46,46 @@
         <RelativeLayout style="@style/flipperLayout">
 
             <TextView
-                android:text="@string/thing_1"
+                  style="@style/flipperLayout.textView" />
+
+            <ImageView
+                   style="@style/flipperLayout.imageView" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/flipperLayout">
+
+            <TextView
                 style="@style/flipperLayout.textView" />
 
             <ImageView
-                android:src="@drawable/android_devices"
                 style="@style/flipperLayout.imageView" />
         </RelativeLayout>
 
         <RelativeLayout style="@style/flipperLayout">
 
             <TextView
-                android:text="@string/thing_2"
-                style="@style/flipperLayout.textView" />
-
-            <ImageView
-                android:src="@drawable/android_winner"
-                style="@style/flipperLayout.imageView" />
-        </RelativeLayout>
-
-        <RelativeLayout style="@style/flipperLayout">
-
-            <TextView
-                android:text="@string/thing_3"
                 android:textDirection="anyRtl"
                 style="@style/flipperLayout.textView" />
 
             <ImageView
-                android:src="@drawable/google_android"
                 style="@style/flipperLayout.imageView" />
         </RelativeLayout>
 
         <RelativeLayout style="@style/flipperLayout">
 
             <TextView
-                android:text="@string/thing_4"
                 style="@style/flipperLayout.textView" />
 
             <ImageView
-                android:src="@drawable/android_versions"
                 style="@style/flipperLayout.imageView" />
         </RelativeLayout>
 
         <RelativeLayout style="@style/flipperLayout">
 
             <TextView
-                android:text="@string/thing_5"
                 style="@style/flipperLayout.textView" />
 
             <ImageView
-                android:src="@drawable/android_opensource"
                 style="@style/flipperLayout.imageView" />
         </RelativeLayout>
 

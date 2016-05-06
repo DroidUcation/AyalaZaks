@@ -13,4 +13,5 @@
     <string name="three" translatable="false">3</string>
     <string name="four" translatable="false">4</string>
     <string name="five" translatable="false">5</string>
+    <string name="title_activity_test">test</string>
 </resources>
