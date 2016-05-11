@@ -1,5 +1,8 @@
 package com.zaks.ayala.fivethings.UI;
 
+import android.app.AlarmManager;
+import android.app.IntentService;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,17 +11,31 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.zaks.ayala.fivethings.Data.AlarmServiceIntent;
 import com.zaks.ayala.fivethings.Data.DBHelper;
 import com.zaks.ayala.fivethings.R;
 
-public class FirstScreen extends AppCompatActivity {
+import java.util.Date;
+
+public class MainActivity extends AppCompatActivity {
+    AlarmManager AlrmMng;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_first_screen);
+        SetAlarm();
+    }
 
+    private void SetAlarm() {
+        AlrmMng = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        AlrmMng.set(AlarmManager.RTC_WAKEUP, 5000, CreateIntent());
+    }
 
+    private PendingIntent CreateIntent() {
+        Intent i = new Intent(this, AlarmServiceIntent.class);
+        PendingIntent p = PendingIntent.getService(this, 0, i, 0);
+        return p;
     }
 
     @Override
