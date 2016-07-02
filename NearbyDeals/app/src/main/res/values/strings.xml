@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">NearbyDeals</string>
+    <string name="title_activity_deals_map">DealsMap</string>
+    <!--main activity-->
+    <string name="main_activity_text_view">How would you like to use me?</string>
+    <string name="main_activity_button_find_deals">Find Nearby Deals</string>
+    <string name="main_activity_button_publish_deals">Publish My Deals To The World</string>
+    <string name="main_activity_save_choice">Save my choice</string>
+
+    <!--preferences activity-->
+    <string name="preferences_activity_label">Preferences</string>
+    <string name="preferences_activity_choose_categories_text">What would you like to find?</string>
+    <string name="preferences_activity_notifications">Notifications</string>
+    <string name="preferences_activity_push_notifications">Push notifications</string>
+    <string name="preferences_activity_next">Next</string>
+
+    <!--add deal activity-->
+    <string name="title_activity_add_deal">Add New Deal</string>
+    <string name="add_deal_description_header">Description</string>
+    <string name="add_deal_description_hint">Describe The new deal here</string>
+    <string name="add_deal_address_header">Address</string>
+    <string name="add_deal_address_hint">Where are you located?</string>
+    <string name="add_deal_from_header">From</string>
+    <string name="add_deal_from_hint">The deal will begin at..</string>
+    <string name="add_deal_to_header">To</string>
+    <string name="add_deal_to_hint">And will end at..</string>
+    <string name="add_deal_save">Save</string>
+    <string name="calendar_haeder">Select date</string>
+    <string name="add_deal_save_succeess">New deal saved successfully.</string>
+    <string name="add_deal_back_to_list">Back to List</string>
+    <string name="title_activity_supplier_deals_list">My Deals List</string>
+    <string name="action_settings">Settings</string>
+    <string name="card_edit">Edit</string>
+    <string name="card_delete">Delete</string>
+    <string name="title_activity_deals">DealsActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

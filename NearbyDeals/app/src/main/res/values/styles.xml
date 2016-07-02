@@ -1,0 +1,69 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme.Base" parent="Theme.AppCompat.Light">
+        <!--   your app branding color for the app bar -->
+        <item name="colorPrimary">@color/primary</item>
+        <!--   darker variant for the status bar and contextual app bars -->
+        <item name="colorPrimaryDark">@color/primary_dark</item>
+        <!--   theme UI controls like checkboxes and text fields -->
+        <item name="colorAccent">@color/accent</item>
+        <item name="android:background">#ffffff</item>
+    </style>
+
+    <style name="AppTheme" parent="AppTheme.Base">
+        <item name="android:actionBarStyle">@style/AppTheme.ActionBar</item>
+        <item name="android:windowContentTransitions">true</item>
+    </style>
+
+    <style name="AppTheme.ActionBar" parent="Widget.AppCompat.Light.ActionBar">
+        <item name="android:background">@color/primary</item>
+
+    </style>
+
+    <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/button_margin</item>
+        <item name="android:background">@color/primary</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/button_horizontal_padding</item>
+        <item name="android:paddingRight">@dimen/button_horizontal_padding</item>
+        <item name="android:paddingTop">@dimen/button_vertical_padding</item>
+        <item name="android:paddingBottom">@dimen/button_vertical_padding</item>
+        <item name="android:radius">20dp</item>
+    </style>
+
+    <style name="AppTheme.Button.Big" parent="AppTheme.Button">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+
+    <style name="AppTheme.Button.Big.MainScreen" parent="AppTheme.Button.Big">
+        <item name="android:layout_marginBottom">@dimen/activity_space</item>
+    </style>
+
+    <style name="AppTheme.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_margin">@dimen/field_space</item>
+    </style>
+
+    <style name="AppTheme.FieldHeader" parent="AppTheme">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textSize">@dimen/header_font</item>
+        <item name="android:textColor">@color/primary</item>
+        <!--<item name="android:layout_marginTop">@dimen/field_space</item>-->
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.zaks.ayala.nearbydeals.ui.AddDealActivity"
+    android:background="@color/gray_background">
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:contentPadding="@dimen/card_padding"
+        app:cardElevation="@dimen/card_elevation"
+        android:transitionName="add_deal_tranzition">
+<LinearLayout
+    android:id="@+id/save_deal_form"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <TextView
+        style="@style/AppTheme.FieldHeader"
+        android:text="@string/add_deal_description_header" />
+
+    <EditText
+        android:id="@+id/deal_description"
+        style="@style/AppTheme.EditText"
+        android:hint="@string/add_deal_description_hint"
+        android:inputType="textAutoComplete" />
+    <TextView
+        style="@style/AppTheme.FieldHeader"
+        android:text="@string/add_deal_address_header" />
+
+    <fragment
+        android:id="@+id/place_autocomplete_fragment"
+        android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment"
+        style="@style/AppTheme.EditText"
+        />
+    <TextView
+        style="@style/AppTheme.FieldHeader"
+        android:text="@string/add_deal_from_header" />
+    <EditText
+        android:id="@+id/deal_from"
+        style="@style/AppTheme.EditText"
+        android:focusable="false"
+        android:hint="@string/add_deal_from_hint"
+        android:inputType="datetime"
+        android:onClick="OpenCalendar" />
+    <TextView
+        style="@style/AppTheme.FieldHeader"
+        android:text="@string/add_deal_to_header" />
+    <EditText
+        android:id="@+id/deal_to"
+        style="@style/AppTheme.EditText"
+        android:focusable="false"
+        android:hint="@string/add_deal_to_hint"
+        android:inputType="datetime"
+        android:onClick="OpenCalendar" />
+
+    <Button
+        style="@style/AppTheme.Button"
+        android:layout_gravity="right"
+        android:onClick="SaveNewDeal"
+        android:text="@string/add_deal_save" />
+
+</LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

@@ -1,0 +1,17 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context=".ui.SupplierDealsListFragment"
+    tools:showIn="@layout/activity_supplier_deals_list"
+    android:background="@color/gray_background">
+<android.support.v7.widget.RecyclerView
+    android:id="@+id/supplier_deals_List"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:scrollbars="vertical"
+    android:background="@color/gray_background">
+</android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

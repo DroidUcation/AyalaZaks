@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "856791119038",
+    "firebase_url": "https://nearbydeals-50577.firebaseio.com",
+    "project_id": "nearbydeals-50577",
+    "storage_bucket": "nearbydeals-50577.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856791119038:android:295fb7ad072dbfd3",
+        "android_client_info": {
+          "package_name": "com.zaks.ayala.nearbydeals"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856791119038-84li28btko4naebij54lnqqna9m3gi60.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.zaks.ayala.nearbydeals",
+            "certificate_hash": "E39098CD575D1B0F6CD584A6025BD65CA8F68966"
+          }
+        },
+        {
+          "client_id": "856791119038-bb77ccu04juvhvri6so60ssr8fthlhdr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7TWiIvVAcirpJRKnsVzAekhAFULirBDk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856791119038-bb77ccu04juvhvri6so60ssr8fthlhdr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

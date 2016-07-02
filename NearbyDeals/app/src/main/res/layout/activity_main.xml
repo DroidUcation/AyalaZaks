@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:weightSum="5"
+    tools:context="com.zaks.ayala.nearbydeals.ui.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_space"
+        android:layout_weight="3"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_space"
+        android:text="@string/main_activity_text_view"
+        android:textAlignment="center" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+
+        <Button
+            android:id="@+id/btn_find_deals"
+            android:onClick="GoToDealsMap"
+            android:text="@string/main_activity_button_find_deals"
+            style="@style/AppTheme.Button.Big.MainScreen"/>
+
+        <Button
+            android:id="@+id/btn_publish_Deals"
+            android:onClick="GoToSupplierLogin"
+            android:text="@string/main_activity_button_publish_deals"
+            style="@style/AppTheme.Button.Big.MainScreen"/>
+
+
+    </LinearLayout>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/activity_space"
+        android:checked="true"
+        android:text="@string/main_activity_save_choice" />
+</LinearLayout>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:title="@string/preferences_activity_choose_categories_text"
+        android:key="pref_key_set_categories">
+
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="@string/preferences_activity_notifications"
+        android:key="pref_key_notifications">
+        <SwitchPreference
+            android:key="pref_push_notifications"
+            android:title="@string/preferences_activity_push_notifications"
+            android:defaultValue="true"
+            ></SwitchPreference>
+    </PreferenceCategory>
+</PreferenceScreen>
