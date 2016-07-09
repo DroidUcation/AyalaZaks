@@ -18,7 +18,10 @@ import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocompleteFragment;
 import com.google.android.gms.location.places.ui.PlaceSelectionListener;
 import com.zaks.ayala.nearbydeals.R;
+import com.zaks.ayala.nearbydeals.bl.models.Category;
 import com.zaks.ayala.nearbydeals.bl.models.Deal;
+import com.zaks.ayala.nearbydeals.bl.models.Supplier;
+import com.zaks.ayala.nearbydeals.bl.services.DealIntentService;
 import com.zaks.ayala.nearbydeals.common.Utilities;
 import com.zaks.ayala.nearbydeals.data.datacontracts.DealsContract;
 
@@ -29,20 +32,22 @@ import java.util.List;
 
 public class AddDealActivity extends AppCompatActivity {
 
-    private static final Uri DealsProviderURL = Uri.parse("content://com.zaks.ayala.provider.deals/items");
+
     int mYear, mMonth, mDay;
     Place selectedPlace;
+    Supplier supplier;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_deal);
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-
+        supplier = (Supplier) getIntent().getSerializableExtra("supplier");
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
-                selectedPlace=place;
+                selectedPlace = place;
             }
 
             @Override
@@ -76,18 +81,18 @@ public class AddDealActivity extends AppCompatActivity {
         EditText editDesc = (EditText) findViewById(R.id.deal_description);
         EditText editFrom = (EditText) findViewById(R.id.deal_from);
         EditText editTo = (EditText) findViewById(R.id.deal_to);
-        ContentValues values = new ContentValues();
-        values.put(DealsContract.DealEntry.Column_Description, editDesc.getText().toString());
-        values.put(DealsContract.DealEntry.Column_FromDate, Utilities.getDateForDB((Date) editFrom.getTag()));
-        values.put(DealsContract.DealEntry.Column_ToDate, Utilities.getDateForDB((Date) editTo.getTag()));
+        Deal newDeal = new Deal();
+        newDeal.setDescription(editDesc.getText().toString());
+        newDeal.setFromDate((Date) editFrom.getTag());
+        newDeal.setToDate((Date) editTo.getTag());
         if (selectedPlace != null) {
-            values.put(DealsContract.DealEntry.Column_Address, selectedPlace.getAddress().toString());
-            values.put(DealsContract.DealEntry.Column_Latitude, selectedPlace.getLatLng().latitude);
-            values.put(DealsContract.DealEntry.Column_Longitude, selectedPlace.getLatLng().longitude);
+            newDeal.setAddress(selectedPlace.getAddress().toString());
+            newDeal.setLatitude(selectedPlace.getLatLng().latitude);
+            newDeal.setLongitude(selectedPlace.getLatLng().longitude);
         }
-        values.put(DealsContract.DealEntry.Column_CategoryID, 2);
-        values.put(DealsContract.DealEntry.Column_SupplierID, 0);
-        Uri res = getContentResolver().insert(DealsProviderURL, values);
+        newDeal.setCategory(supplier.getCategory());
+        newDeal.setSupplierID(supplier.getId());
+        DealIntentService.startActionSave(this, newDeal);
         this.finish();
     }
 

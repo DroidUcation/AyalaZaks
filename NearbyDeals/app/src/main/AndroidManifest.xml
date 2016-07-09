@@ -43,7 +43,7 @@
         <activity
             android:name=".ui.SettingActivity"
             android:label="@string/preferences_activity_label" />
-        <activity android:name=".ui.DealsMapActivity" />
+
 
         <provider
             android:name=".data.contentproviders.CategoriesProvider"
@@ -51,6 +51,9 @@
         <provider
             android:name=".data.contentproviders.DealsProvider"
             android:authorities="com.zaks.ayala.provider.deals" />
+        <provider
+            android:name=".data.contentproviders.SuppliersProvider"
+            android:authorities="com.zaks.ayala.provider.suppliers" />
 
         <activity
             android:name=".ui.AddDealActivity"
@@ -62,8 +65,17 @@
             android:label="@string/title_activity_supplier_deals_list"
             android:theme="@style/AppTheme" />
         <activity android:name=".ui.EditDealActivity" />
-        <activity android:name=".ui.DealsActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".ui.DealsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".ui.SupplierDetailsActivity" />
+
+        <service
+            android:name=".bl.services.SupplierIntentService"
+            android:exported="false" />
+        <service
+            android:name=".bl.services.DealIntentService"
+            android:exported="false"></service>
     </application>
 
 </manifest>

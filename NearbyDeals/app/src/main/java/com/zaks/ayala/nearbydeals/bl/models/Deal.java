@@ -1,5 +1,6 @@
 package com.zaks.ayala.nearbydeals.bl.models;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 
 import com.zaks.ayala.nearbydeals.common.Utilities;
@@ -17,12 +18,13 @@ import java.util.Date;
 public class Deal implements Serializable {
 
     private int id;
+    private int supplierID;
     private String supplierName;
     private String supplierEmail;
     private String supplierPhone;
     private String address;
     private String description;
-    private Category category;
+    private Category supplierCategory;
     private double latitude;
     private double longitude;
     private Date fromDate;
@@ -70,11 +72,11 @@ public class Deal implements Serializable {
     }
 
     public Category getCategory() {
-        return category;
+        return supplierCategory;
     }
 
-    public void setCategory(Category Category) {
-        category = category;
+    public void setCategory(Category category) {
+        supplierCategory = category;
     }
 
     public Date getFromDate() {
@@ -93,7 +95,6 @@ public class Deal implements Serializable {
         this.toDate = toDate;
     }
 
-
     public int getId() {
         return id;
     }
@@ -102,6 +103,21 @@ public class Deal implements Serializable {
         this.id = id;
     }
 
+    public String getSupplierEmail() {
+        return supplierEmail;
+    }
+
+    public void setSupplierEmail(String supplierEmail) {
+        this.supplierEmail = supplierEmail;
+    }
+
+    public String getSupplierPhone() {
+        return supplierPhone;
+    }
+
+    public void setSupplierPhone(String supplierPhone) {
+        this.supplierPhone = supplierPhone;
+    }
 
     public static Deal fromCursor(Cursor cursor) {
         Deal deal = new Deal();
@@ -116,7 +132,9 @@ public class Deal implements Serializable {
         deal.setSupplierName(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Name))));
         deal.setSupplierEmail(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Email))));
         deal.setSupplierPhone(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Phone))));
-        Category category = new Category(cursor.getString(cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Description))),
+        Category category = new Category(
+                cursor.getInt(cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_ID))),
+                cursor.getString(cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Description))),
                 cursor.getString(cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Color))));
         deal.setCategory(category);
 
@@ -136,23 +154,31 @@ public class Deal implements Serializable {
                 SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Email),
                 SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Phone),
                 CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Description),
-                CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Color)
+                CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Color),
+                CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_ID)
         };
     }
 
-    public String getSupplierEmail() {
-        return supplierEmail;
+    public ContentValues getContentValues(boolean isNew) {
+        ContentValues values = new ContentValues();
+        values.put(DealsContract.DealEntry.Column_Description,getDescription());
+        values.put(DealsContract.DealEntry.Column_Address,getAddress());
+        values.put(DealsContract.DealEntry.Column_FromDate,Utilities.getDateForDB(getFromDate()));
+        values.put(DealsContract.DealEntry.Column_ToDate,Utilities.getDateForDB(getToDate()));
+        values.put(DealsContract.DealEntry.Column_Latitude,getLatitude());
+        values.put(DealsContract.DealEntry.Column_Longitude,getLongitude());
+        if(isNew) {
+            values.put(DealsContract.DealEntry.Column_SupplierID, getSupplierID());
+            values.put(DealsContract.DealEntry.Column_CategoryID, getCategory().getId());
+        }
+        return values;
     }
 
-    public void setSupplierEmail(String supplierEmail) {
-        this.supplierEmail = supplierEmail;
+    public int getSupplierID() {
+        return supplierID;
     }
 
-    public String getSupplierPhone() {
-        return supplierPhone;
-    }
-
-    public void setSupplierPhone(String supplierPhone) {
-        this.supplierPhone = supplierPhone;
+    public void setSupplierID(int supplierID) {
+        this.supplierID = supplierID;
     }
 }

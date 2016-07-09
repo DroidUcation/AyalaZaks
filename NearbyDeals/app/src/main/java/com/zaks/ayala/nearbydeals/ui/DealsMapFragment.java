@@ -70,6 +70,7 @@ public class DealsMapFragment extends Fragment implements
         View v= inflater.inflate(R.layout.fragment_deals_map, container, false);
         buildGoogleApiClient();
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        mLocationRequest = new LocationRequest();
 
         SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
@@ -129,15 +130,20 @@ public class DealsMapFragment extends Fragment implements
             if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_DENIED) {
                 mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
                 if (mLastLocation != null) {
-                    LatLng loc = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
-                    mMap.addMarker(new MarkerOptions().position(loc).title("You are here!"));
-                    mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 14));
+                    setMapCenter();
                 }
                 else
                 {
 
+                    LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient,mLocationRequest,this);
                 }
             }
+        }
+
+        private void setMapCenter() {
+            LatLng loc = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+            mMap.addMarker(new MarkerOptions().position(loc));
+            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 14));
         }
 
         @Override
@@ -165,7 +171,11 @@ public class DealsMapFragment extends Fragment implements
 
         @Override
         public void onLocationChanged(Location location) {
-
+            mLastLocation=location;
+            setMapCenter();
+            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_DENIED) {
+                LocationServices.FusedLocationApi.requestLocationUpdates(mGoogleApiClient, mLocationRequest, this);
+            }
         }
 
 

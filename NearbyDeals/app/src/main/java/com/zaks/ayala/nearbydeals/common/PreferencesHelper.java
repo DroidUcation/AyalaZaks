@@ -7,6 +7,8 @@ import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.preference.SwitchPreference;
 
+import com.zaks.ayala.nearbydeals.bl.CategoryHelper;
+import com.zaks.ayala.nearbydeals.bl.models.Category;
 import com.zaks.ayala.nearbydeals.data.datacontracts.CategoriesContract;
 
 import java.util.ArrayList;
@@ -23,16 +25,12 @@ public class PreferencesHelper {
     }
 
     public static ArrayList<String> GetAllUserCategories(Context context) {
-        Uri CategoriesListURL = Uri.parse("content://com.zaks.ayala.provider.categories/items");
-        Cursor data = context.getContentResolver().query(CategoriesListURL, null, null, null, CategoriesContract.CategoryEntry.Column_Description);
+        CategoryHelper helper=new CategoryHelper(context);
+        ArrayList<Category> categoryArrayList= helper.GetCategories();
         ArrayList<String> categories = new ArrayList<String>();
-        if (data.moveToFirst()) {
-            do {
-
-                if (GetCategoryEnabled(context, data.getString(data.getColumnIndex(CategoriesContract.CategoryEntry.Column_Description))))
-                    categories.add(data.getString(data.getColumnIndex(CategoriesContract.CategoryEntry.Column_Description)));
-            }
-            while (data.moveToNext());
+        for (Category c: categoryArrayList) {
+            if (GetCategoryEnabled(context, c.getDescription()))
+                categories.add(c.getDescription());
         }
         return categories;
     }

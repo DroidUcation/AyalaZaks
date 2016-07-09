@@ -5,21 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardElevation="@dimen/card_elevation"
-    app:contentPadding="@dimen/card_padding">
+    app:contentPadding="@dimen/card_padding"
+    android:layout_marginBottom="@dimen/card_padding">
 <LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:weightSum="4">
     <ImageView
         android:id="@+id/deal_item_image"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"/>
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_weight="3">
+        android:layout_weight="3"
+       >
 
 
         <TextView
@@ -27,7 +31,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textColor="@color/primary"
-            android:textSize="@dimen/card_primary_text" />
+            android:textSize="@dimen/card_primary_text"
+            />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

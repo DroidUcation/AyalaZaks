@@ -6,6 +6,13 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.location.Address;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.zaks.ayala.nearbydeals.bl.services.DealIntentService;
+import com.zaks.ayala.nearbydeals.bl.services.SupplierIntentService;
 import com.zaks.ayala.nearbydeals.common.Utilities;
 import com.zaks.ayala.nearbydeals.data.datacontracts.CategoriesContract;
 import com.zaks.ayala.nearbydeals.data.datacontracts.DealsContract;
@@ -17,7 +24,7 @@ import com.zaks.ayala.nearbydeals.data.datacontracts.SuppliersContract;
 public class DBHelper extends SQLiteOpenHelper {
 
     private static final String DBName = "NearbyDeals.db";
-    private static final int DBVersion = 6;
+    private static final int DBVersion = 19;
 
     private static final String CreateDealsTable =
             "Create Table " + DealsContract.DealEntry.TableName + " (" +
@@ -67,7 +74,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL(CreateCategoryTable);
         db.execSQL(CreateSuppliersTable);
         initCategories(db);
-        initSupplier(db);
+        SupplierIntentService.startActionClone(mContext);
+        DealIntentService.startActionClone(mContext);
     }
 
     private void initSupplier(SQLiteDatabase db) {
@@ -86,7 +94,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     private void initCategories(SQLiteDatabase db) {
-        insertCategory(db, "Fashion", "#e9ie63");
+        insertCategory(db, "Fashion", "#e91e63");
         insertCategory(db, "Health", "#3f51b5");
         insertCategory(db, "Food", "#ff9800");
         insertCategory(db, "Sport", "#9c27b0");

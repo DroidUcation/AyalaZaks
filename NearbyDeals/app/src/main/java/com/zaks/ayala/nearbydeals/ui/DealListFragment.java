@@ -37,7 +37,7 @@ public class DealListFragment extends Fragment {
         return view;
     }
     public void setCursorAdapter(Cursor cursor) {
-        dealsAdapter = new SupplierDealsListAdapter(getContext(), cursor);
+        dealsAdapter = new DealListAdapter(getContext(), cursor);
         dealsRecyclerView.setAdapter(dealsAdapter);
     }
 }

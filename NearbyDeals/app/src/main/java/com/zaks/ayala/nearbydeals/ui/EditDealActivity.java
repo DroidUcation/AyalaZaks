@@ -19,6 +19,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.zaks.ayala.nearbydeals.R;
 import com.zaks.ayala.nearbydeals.bl.models.Deal;
+import com.zaks.ayala.nearbydeals.bl.services.DealIntentService;
 import com.zaks.ayala.nearbydeals.common.Utilities;
 import com.zaks.ayala.nearbydeals.data.datacontracts.DealsContract;
 
@@ -95,18 +96,17 @@ public class EditDealActivity extends AppCompatActivity {
 
     public void SaveNewDeal(View view) {
 
-        ContentValues values = new ContentValues();
-        values.put(DealsContract.DealEntry.Column_Description, editDesc.getText().toString());
-        values.put(DealsContract.DealEntry.Column_FromDate, Utilities.getDateForDB((Date) editFrom.getTag()));
-        values.put(DealsContract.DealEntry.Column_ToDate, Utilities.getDateForDB((Date) editTo.getTag()));
+        Deal newDeal = new Deal();
+        newDeal.setId(dealID);
+        newDeal.setDescription(editDesc.getText().toString());
+        newDeal.setFromDate((Date) editFrom.getTag());
+        newDeal.setToDate((Date) editTo.getTag());
         if (selectedPlace != null) {
-            values.put(DealsContract.DealEntry.Column_Address, selectedPlace.getAddress().toString());
-            values.put(DealsContract.DealEntry.Column_Latitude, selectedPlace.getLatLng().latitude);
-            values.put(DealsContract.DealEntry.Column_Longitude, selectedPlace.getLatLng().longitude);
+            newDeal.setAddress(selectedPlace.getAddress().toString());
+            newDeal.setLatitude(selectedPlace.getLatLng().latitude);
+            newDeal.setLongitude(selectedPlace.getLatLng().longitude);
         }
-        values.put(DealsContract.DealEntry.Column_CategoryID, 2);
-        values.put(DealsContract.DealEntry.Column_SupplierID, 0);
-        int res = getContentResolver().update(DealsProviderURL, values, DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_ID) + " = " + dealID, null);
+        DealIntentService.startActionEdit(this, newDeal);
         this.finish();
     }
 

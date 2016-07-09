@@ -15,19 +15,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.zaks.ayala.nearbydeals.R;
+import com.zaks.ayala.nearbydeals.bl.SupplierHelper;
 import com.zaks.ayala.nearbydeals.bl.models.Deal;
+import com.zaks.ayala.nearbydeals.bl.models.Supplier;
+import com.zaks.ayala.nearbydeals.data.datacontracts.CategoriesContract;
 import com.zaks.ayala.nearbydeals.data.datacontracts.DealsContract;
+import com.zaks.ayala.nearbydeals.data.datacontracts.SuppliersContract;
 
 public class SupplierDealsListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
 
     private static final int DealsLoaderId = 1;
     private static final Uri DealsProviderUri = Uri.parse("content://com.zaks.ayala.provider.deals/items");
+
     SupplierDealsListFragment fragment;
+    Supplier currSupplier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_deals_list);
+        getSupplier();
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
         final Activity currActivity = this;
@@ -37,6 +44,7 @@ public class SupplierDealsListActivity extends AppCompatActivity implements Load
             public void onClick(View view) {
                 Intent intent =
                         new Intent(SupplierDealsListActivity.this, AddDealActivity.class);
+                intent.putExtra("supplier", currSupplier);
 //
                 ActivityOptionsCompat transitionActivityOptions = ActivityOptionsCompat.makeScaleUpAnimation(view, 0, 0, view.getWidth(), view.getHeight());
                 ActivityCompat.startActivity(
@@ -49,10 +57,16 @@ public class SupplierDealsListActivity extends AppCompatActivity implements Load
         fragment = (SupplierDealsListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_deals_list);
     }
 
+    private void getSupplier() {
+        String supplierEmail = getIntent().getStringExtra("supplierEmail");
+        SupplierHelper helper = new SupplierHelper(this);
+        currSupplier = helper.GetSupplierByEmail(supplierEmail);
+    }
+
 
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String selection = DealsContract.DealEntry.Column_SupplierID + " = 0";
+        String selection = DealsContract.DealEntry.Column_SupplierID + " = " + currSupplier.getId();
         return new CursorLoader(this, DealsProviderUri, Deal.getProjectionMap(), selection, null, DealsContract.DealEntry.Column_FromDate);
     }
 
