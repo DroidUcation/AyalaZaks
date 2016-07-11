@@ -27,12 +27,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.zaks.ayala.nearbydeals.R;
 import com.zaks.ayala.nearbydeals.bl.models.Deal;
 import com.zaks.ayala.nearbydeals.common.PreferencesHelper;
+import com.zaks.ayala.nearbydeals.common.Utilities;
 import com.zaks.ayala.nearbydeals.data.datacontracts.CategoriesContract;
 import com.zaks.ayala.nearbydeals.data.datacontracts.DealsContract;
 
@@ -206,7 +208,7 @@ public class DealsMapFragment extends Fragment implements
 
         private void addMarkers(Deal deal) {
             Marker marker=mMap.addMarker(new MarkerOptions()
-                    //.icon(BitmapDescriptorFactory.fromResource(Utilities.getCategoryIcon(data.getString(data.getColumnIndex(DealsContract.DealEntry.Column_Description)))))
+                    .icon(BitmapDescriptorFactory.fromResource(Utilities.getCategoryIcon(deal.getCategory().getDescription())))
                     .position(new LatLng(deal.getLatitude(), deal.getLongitude())));
             dealHashMap.put(marker.getId(),deal);
         }

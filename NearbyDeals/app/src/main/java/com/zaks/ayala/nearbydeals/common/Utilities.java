@@ -63,11 +63,11 @@ public class Utilities {
     {
         switch (categoryName)
         {
-            case "Fashion":return R.drawable.shopping;
-            case "Health":return R.drawable.heart_pulse;
-            case "Food":return R.drawable.food;
-            case "Sport":return R.drawable.weight_kilogram;
-            case "Office":return R.drawable.pencil;
+            case "Fashion":return R.drawable.ic_shopping_bag;
+            case "Health":return R.drawable.ic_pill;
+            case "Food":return R.drawable.ic_hamburger;
+            case "Sport":return R.drawable.ic_trainers;
+            case "Office":return R.drawable.ic_pen;
         }
         return 0;
     }

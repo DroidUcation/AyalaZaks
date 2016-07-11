@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/primary"
             android:textSize="@dimen/card_primary_text"
+            android:text="Ayala"
             />
         <TextView
             android:layout_width="match_parent"
