@@ -14,13 +14,13 @@ public final class DealsContract {
         public static final String Column_ID = "ID";
         public static final String Column_SupplierID = "SupplierID";
         public static final String Column_CategoryID = "CategoryID";
-        public static final String Column_Description = "Description";
+        public static final String Column_Description = "DealDescription";
         public static final String Column_Image = "Image";
-        public static final String Column_Address = "Address";
+        public static final String Column_Address = "DealAddress";
         public static final String Column_FromDate = "FromDate";
         public static final String Column_ToDate = "ToDate";
-        public static final String Column_Longitude = "Longitude";
-        public static final String Column_Latitude = "Latitude";
+        public static final String Column_Longitude = "DealLongitude";
+        public static final String Column_Latitude = "DealLatitude";
 
         public static String addPrefix(String field) {
             return TableName + "." + field;

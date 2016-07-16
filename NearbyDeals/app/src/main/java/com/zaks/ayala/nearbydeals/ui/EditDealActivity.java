@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -39,11 +40,14 @@ public class EditDealActivity extends AppCompatActivity {
     EditText editFrom;
     EditText editTo;
     PlaceAutocompleteFragment autocompleteFragment;
-
+    ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_deal);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         theDeal = (Deal) getIntent().getSerializableExtra("Deal");
         dealID = theDeal.getId();
         editDesc = (EditText) findViewById(R.id.deal_description);
@@ -51,7 +55,7 @@ public class EditDealActivity extends AppCompatActivity {
         editTo = (EditText) findViewById(R.id.deal_to);
         autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
-
+        autocompleteFragment.setHint(getString(R.string.add_deal_address_hint));
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {

@@ -28,9 +28,9 @@ public class CategoryHelper {
         if (data.moveToFirst()) {
             do {
                 Category category = new Category();
-                category.setId(data.getInt(data.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_ID))));
-                category.setDescription(data.getString(data.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Description))));
-                category.setColor(data.getString(data.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Color))));
+                category.setId(data.getInt(data.getColumnIndex(CategoriesContract.CategoryEntry.Column_ID)));
+                category.setDescription(data.getString(data.getColumnIndex(CategoriesContract.CategoryEntry.Column_Description)));
+                category.setColor(data.getString(data.getColumnIndex(CategoriesContract.CategoryEntry.Column_Color)));
                 categories.add(category);
             }
             while (data.moveToNext());

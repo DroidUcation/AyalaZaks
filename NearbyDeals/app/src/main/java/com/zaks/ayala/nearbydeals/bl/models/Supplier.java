@@ -89,28 +89,28 @@ public class Supplier implements Serializable {
 
     public static Supplier fromCursor(Cursor cursor) {
         Supplier supplier = new Supplier();
-        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_ID)) != -1)
-            supplier.setId(cursor.getInt(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_ID))));
-        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Name)) != -1)
-            supplier.setName(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Name))));
-        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Email)) != -1)
-            supplier.setEmail(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Email))));
-        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Phone)) != -1)
-            supplier.setPhone(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Phone))));
-        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Address)) != -1)
-            supplier.setAddress(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Address))));
-        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Latitude)) != -1)
-            supplier.setLatitude(cursor.getDouble(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Latitude))));
-        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Longitude)) != -1)
-            supplier.setLongitude(cursor.getDouble(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Longitude))));
+        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_ID) != -1)
+            supplier.setId(cursor.getInt(cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_ID)));
+        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Name) != -1)
+            supplier.setName(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Name)));
+        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Email) != -1)
+            supplier.setEmail(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Email)));
+        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Phone) != -1)
+            supplier.setPhone(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Phone)));
+        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Address) != -1)
+            supplier.setAddress(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Address)));
+        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Latitude) != -1)
+            supplier.setLatitude(cursor.getDouble(cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Latitude)));
+        if (cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Longitude) != -1)
+            supplier.setLongitude(cursor.getDouble(cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Longitude)));
         int catID=0;
         String catDesc="", catColor="";
-        if (cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_ID)) != -1)
-            catID = cursor.getInt(cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_ID)));
-        if (cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Description)) != -1)
-            catDesc = cursor.getString(cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Description)));
-        if (cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Color)) != -1)
-            catColor = cursor.getString(cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Color)));
+        if (cursor.getColumnIndex(CategoriesContract.CategoryEntry.Column_ID) != -1)
+            catID = cursor.getInt(cursor.getColumnIndex(CategoriesContract.CategoryEntry.Column_ID));
+        if (cursor.getColumnIndex(CategoriesContract.CategoryEntry.Column_Description) != -1)
+            catDesc = cursor.getString(cursor.getColumnIndex(CategoriesContract.CategoryEntry.Column_Description));
+        if (cursor.getColumnIndex(CategoriesContract.CategoryEntry.Column_Color) != -1)
+            catColor = cursor.getString(cursor.getColumnIndex(CategoriesContract.CategoryEntry.Column_Color));
 
         com.zaks.ayala.nearbydeals.bl.models.Category supplierCategory = new Category(catID, catDesc, catColor);
 
@@ -120,15 +120,16 @@ public class Supplier implements Serializable {
 
     public static String[] getProjectionMap() {
         return new String[]{
-                SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Name),
-                SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Email),
-                SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Phone),
-                SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Address),
-                SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Longitude),
-                SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Latitude),
-                CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Description),
-                CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Color),
-                CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_ID)
+                SuppliersContract.SupplierEntry.Column_ID,
+                SuppliersContract.SupplierEntry.Column_Name,
+                SuppliersContract.SupplierEntry.Column_Email,
+                SuppliersContract.SupplierEntry.Column_Phone,
+                SuppliersContract.SupplierEntry.Column_Address,
+                SuppliersContract.SupplierEntry.Column_Longitude,
+                SuppliersContract.SupplierEntry.Column_Latitude,
+                CategoriesContract.CategoryEntry.Column_Description,
+                CategoriesContract.CategoryEntry.Column_Color,
+                CategoriesContract.CategoryEntry.Column_ID
         };
     }
 

@@ -9,6 +9,7 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.Preference;
 import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
 import android.preference.SwitchPreference;
@@ -29,6 +30,7 @@ import android.widget.LinearLayout;
 import android.widget.Switch;
 
 import com.zaks.ayala.nearbydeals.R;
+import com.zaks.ayala.nearbydeals.bl.NotificationManager;
 import com.zaks.ayala.nearbydeals.common.Utilities;
 import com.zaks.ayala.nearbydeals.data.datacontracts.CategoriesContract;
 import com.zaks.ayala.nearbydeals.data.datacontracts.DealsContract;
@@ -51,20 +53,37 @@ public class SettingFragment extends PreferenceFragment {
         super.onCreate(savedInstanceState);
         addPreferencesFromResource(R.xml.preferences);
         categoriesList = (PreferenceCategory) getPreferenceScreen().findPreference("pref_key_set_categories");
+        SwitchPreference notifications=(SwitchPreference) getPreferenceScreen().findPreference("pref_push_notifications");
+        notifications.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                if(((boolean)newValue))
+                {
+                    NotificationManager.startNotificationService(getActivity());
+                }
+                else
+                {
+                    NotificationManager.stopNotificationService(getActivity());
+                }
+                return true;
+            }
+        });
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         LinearLayout v = (LinearLayout) super.onCreateView(inflater, container, savedInstanceState);
-        View buttonView = inflater.inflate(R.layout.next_button, null);
-        Button btn = (Button) buttonView.findViewById(R.id.preferences_activity_next_button);
-        v.addView(buttonView);
-        btn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent i = new Intent(getActivity().getApplicationContext(), DealsActivity.class);
-                startActivity(i);
-            }
-        });
+        if(getActivity().getIntent().getBooleanExtra(SettingActivity.extra_IsFirst,false)) {
+            View buttonView = inflater.inflate(R.layout.next_button, null);
+            Button btn = (Button) buttonView.findViewById(R.id.preferences_activity_next_button);
+            v.addView(buttonView);
+            btn.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    Intent i = new Intent(getActivity().getApplicationContext(), DealsActivity.class);
+                    startActivity(i);
+                }
+            });
+        }
         return v;
     }
 
@@ -80,8 +99,6 @@ public class SettingFragment extends PreferenceFragment {
                 switchPref.setDefaultValue(true);
                 switchPref.setKey(data.getString(data.getColumnIndex(CategoriesContract.CategoryEntry.Column_Description)));
                 switchPref.setTitle(data.getString(data.getColumnIndex(CategoriesContract.CategoryEntry.Column_Description)));
-  //              Drawable icon = getResources().getDrawable(Utilities.getCategoryIcon(data.getInt(data.getColumnIndex(CategoriesContract.CategoryEntry.Column_ID))));
-//                icon.setColorFilter(Color.parseColor(data.getString(data.getColumnIndex(CategoriesContract.CategoryEntry.Column_Color))), PorterDuff.Mode.MULTIPLY);
                 switchPref.setIcon(Utilities.getCategoryIcon(data.getString(data.getColumnIndex(CategoriesContract.CategoryEntry.Column_Description))));
                 categoriesList.addPreference(switchPref);
             }

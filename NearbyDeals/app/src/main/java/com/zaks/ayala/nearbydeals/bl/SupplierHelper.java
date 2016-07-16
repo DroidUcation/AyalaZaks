@@ -20,7 +20,7 @@ public class SupplierHelper {
     }
 
     public Supplier GetSupplierByEmail(String Email) {
-        String selection = SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Email) + " = '" + Email + "'";
+        String selection = SuppliersContract.SupplierEntry.Column_Email + " = '" + Email + "'";
         Cursor data = context.getContentResolver().query(SuppliersProviderUri, Supplier.getProjectionMap(), selection, null, null);
         if (data != null && data.moveToFirst())
             return Supplier.fromCursor(data);

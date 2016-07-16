@@ -10,13 +10,20 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.TextUtils;
+import android.util.Log;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.zaks.ayala.nearbydeals.common.PreferencesHelper;
+import com.zaks.ayala.nearbydeals.common.Utilities;
 import com.zaks.ayala.nearbydeals.data.dal.DBHelper;
 import com.zaks.ayala.nearbydeals.data.datacontracts.CategoriesContract;
 import com.zaks.ayala.nearbydeals.data.datacontracts.DealsContract;
 import com.zaks.ayala.nearbydeals.data.datacontracts.SuppliersContract;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
@@ -28,7 +35,6 @@ public class DealsProvider extends ContentProvider {
     static final Uri CONTENT_URI = Uri.parse(URL);
     private static HashMap<String, String> DealsMap;
     static final UriMatcher uriMatcher;
-
     static {
         uriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
         uriMatcher.addURI(PROVIDER_NAME, "items", 1);
@@ -55,20 +61,19 @@ public class DealsProvider extends ContentProvider {
         StringBuilder sb = new StringBuilder();
         sb.append(DealsContract.DealEntry.TableName);
         sb.append(" LEFT JOIN ");
-        sb.append(CategoriesContract.CategoryEntry.TableName);
-        sb.append(" ON (");
-        sb.append(DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_CategoryID));
-        sb.append(" = ");
-        sb.append(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_ID));
-        sb.append(")");
-        sb.append(" LEFT JOIN ");
         sb.append(SuppliersContract.SupplierEntry.TableName);
         sb.append(" ON (");
         sb.append(DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_SupplierID));
         sb.append(" = ");
         sb.append(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_ID));
         sb.append(")");
-
+        sb.append(" LEFT JOIN ");
+        sb.append(CategoriesContract.CategoryEntry.TableName);
+        sb.append(" ON (");
+        sb.append(DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_CategoryID));
+        sb.append(" = ");
+        sb.append(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_ID));
+        sb.append(")");
         queryBuilder.setTables(sb.toString());
         switch (uriMatcher.match(uri)) {
             case 1:
@@ -81,7 +86,7 @@ public class DealsProvider extends ContentProvider {
                 throw new IllegalArgumentException("Unknown URI " + uri);
         }
         if (sortOrder == null || sortOrder == "") {
-            sortOrder = DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_Description);
+            sortOrder =DealsContract.DealEntry.Column_Description;
         }
 
         Cursor cursor = queryBuilder.query(database, projection, selection,
@@ -154,4 +159,6 @@ public class DealsProvider extends ContentProvider {
         getContext().getContentResolver().notifyChange(uri, null);
         return count;
     }
+
+
 }

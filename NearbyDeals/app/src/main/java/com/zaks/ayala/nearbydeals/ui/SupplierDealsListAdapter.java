@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.zaks.ayala.nearbydeals.R;
 import com.zaks.ayala.nearbydeals.bl.models.Deal;
+import com.zaks.ayala.nearbydeals.bl.services.DealIntentService;
 import com.zaks.ayala.nearbydeals.common.Utilities;
 
 /**
@@ -23,9 +24,10 @@ import com.zaks.ayala.nearbydeals.common.Utilities;
  */
 public class SupplierDealsListAdapter extends CursorRecyclerViewAdapter<SupplierDealsListAdapter.ViewHolder> {
     Context adapterContext;
-    public SupplierDealsListAdapter(Context context, Cursor cursor){
-        super(context,cursor);
-        adapterContext=context;
+
+    public SupplierDealsListAdapter(Context context, Cursor cursor) {
+        super(context, cursor);
+        adapterContext = context;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -36,15 +38,16 @@ public class SupplierDealsListAdapter extends CursorRecyclerViewAdapter<Supplier
         public ImageView image;
         public Button editButton;
         public Button deleteButton;
+
         public ViewHolder(View view) {
             super(view);
-            description = (TextView)view.findViewById(R.id.deal_list_item_description);
-            address = (TextView)view.findViewById(R.id.deal_list_item_address);
-            dates = (TextView)view.findViewById(R.id.deal_list_item_dates);
-            image = (ImageView) view.findViewById(R.id.deal_list_item_image);
-            editButton=(Button)view.findViewById(R.id.card_button_edit);
-            deleteButton=(Button)view.findViewById(R.id.card_button_delete);
-            card=(CardView)view.findViewById(R.id.deal_list_item_card);
+            description = (TextView) view.findViewById(R.id.deal_list_item_description);
+            address = (TextView) view.findViewById(R.id.deal_list_item_address);
+            dates = (TextView) view.findViewById(R.id.deal_list_item_dates);
+//            image = (ImageView) view.findViewById(R.id.deal_list_item_image);
+            editButton = (Button) view.findViewById(R.id.card_button_edit);
+            deleteButton = (Button) view.findViewById(R.id.card_button_delete);
+            card = (CardView) view.findViewById(R.id.deal_list_item_card);
         }
     }
 
@@ -61,12 +64,12 @@ public class SupplierDealsListAdapter extends CursorRecyclerViewAdapter<Supplier
         final Deal deal = Deal.fromCursor(cursor);
         viewHolder.description.setText(deal.getDescription());
         viewHolder.address.setText(deal.getAddress());
-        viewHolder.dates.setText(Utilities.getDateForDisplay(deal.getFromDate())+" - "+Utilities.getDateForDisplay(deal.getToDate()));
+        viewHolder.dates.setText(Utilities.getDateForDisplay(deal.getFromDate()) + " - " + Utilities.getDateForDisplay(deal.getToDate()));
         viewHolder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(adapterContext,EditDealActivity.class);
-                i.putExtra("Deal",deal);
+                Intent i = new Intent(adapterContext, EditDealActivity.class);
+                i.putExtra("Deal", deal);
                 viewHolder.card.setDrawingCacheEnabled(true);
                 viewHolder.card.setPressed(false);
                 viewHolder.card.refreshDrawableState();
@@ -74,9 +77,15 @@ public class SupplierDealsListAdapter extends CursorRecyclerViewAdapter<Supplier
                 ActivityOptions opts = ActivityOptions.makeThumbnailScaleUpAnimation(
                         viewHolder.card, bitmap, 0, 0);
                 // Request the activity be started, using the custom animation options.
-                adapterContext.startActivity(i,opts.toBundle());
+                adapterContext.startActivity(i, opts.toBundle());
                 viewHolder.card.setDrawingCacheEnabled(false);
 
+            }
+        });
+        viewHolder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DealIntentService.startActionDelete(adapterContext, deal.getId());
             }
         });
     }

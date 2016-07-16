@@ -12,8 +12,11 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.zaks.ayala.nearbydeals.R;
 import com.zaks.ayala.nearbydeals.bl.SupplierHelper;
 import com.zaks.ayala.nearbydeals.bl.models.Deal;
@@ -35,8 +38,9 @@ public class SupplierDealsListActivity extends AppCompatActivity implements Load
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_supplier_deals_list);
         getSupplier();
-//        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         final Activity currActivity = this;
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -58,9 +62,13 @@ public class SupplierDealsListActivity extends AppCompatActivity implements Load
     }
 
     private void getSupplier() {
-        String supplierEmail = getIntent().getStringExtra("supplierEmail");
-        SupplierHelper helper = new SupplierHelper(this);
-        currSupplier = helper.GetSupplierByEmail(supplierEmail);
+        FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+        FirebaseUser user = mFirebaseAuth.getCurrentUser();
+        if (user != null) {
+            String supplierEmail = user.getEmail();
+            SupplierHelper helper = new SupplierHelper(this);
+            currSupplier = helper.GetSupplierByEmail(supplierEmail);
+        }
     }
 
 

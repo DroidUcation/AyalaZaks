@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.zaks.ayala.nearbydeals">
+    package="com.zaks.ayala.nearbydeals" >
 
     <!--
          The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
@@ -16,7 +16,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
 
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -29,11 +29,9 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="@string/google_maps_key" />
-
         <activity
-            android:name=".ui.MainActivity"
-            android:label="@string/title_activity_deals_map"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:name=".ui.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,9 +39,20 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.SettingActivity"
-            android:label="@string/preferences_activity_label" />
+            android:name=".ui.MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <!--<intent-filter>-->
+                <!--<action android:name="android.intent.action.MAIN" />-->
 
+                <!--<category android:name="android.intent.category.LAUNCHER" />-->
+            <!--</intent-filter>-->
+        </activity>
+        <activity
+            android:name=".ui.SettingActivity"
+            android:label="@string/preferences_activity_label"
+            android:parentActivityName=".ui.DealsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <provider
             android:name=".data.contentproviders.CategoriesProvider"
@@ -59,23 +68,40 @@
             android:name=".ui.AddDealActivity"
             android:label="@string/title_activity_add_deal"
             android:parentActivityName=".ui.SupplierDealsListActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.SupplierDealsListActivity"
             android:label="@string/title_activity_supplier_deals_list"
-            android:theme="@style/AppTheme" />
-        <activity android:name=".ui.EditDealActivity" />
+            android:parentActivityName=".ui.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ui.EditDealActivity"
+            android:label="@string/title_activity_edit_deal"
+            android:parentActivityName=".ui.SupplierDealsListActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.DealsActivity"
+            android:parentActivityName=".ui.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".ui.SupplierDetailsActivity" />
+        <activity
+            android:parentActivityName=".ui.MainActivity"
+            android:name=".ui.SupplierDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <service
             android:name=".bl.services.SupplierIntentService"
             android:exported="false" />
         <service
             android:name=".bl.services.DealIntentService"
-            android:exported="false"></service>
+            android:exported="false" />
+
+        <service android:name=".bl.services.DealsNotificationsService"
+            android:permission="com.google.android.gms.permission.BIND_NETWORK_TASK_SERVICE"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.android.gms.gcm.ACTION_TASK_READY"/>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>

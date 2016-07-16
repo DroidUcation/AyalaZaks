@@ -1,6 +1,7 @@
 package com.zaks.ayala.nearbydeals.ui;
 
 import android.app.PendingIntent;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -19,6 +20,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.gcm.GcmNetworkManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -26,6 +28,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.zaks.ayala.nearbydeals.R;
+import com.zaks.ayala.nearbydeals.bl.NotificationManager;
 import com.zaks.ayala.nearbydeals.bl.SupplierHelper;
 import com.zaks.ayala.nearbydeals.bl.models.Supplier;
 import com.zaks.ayala.nearbydeals.common.PreferencesHelper;
@@ -37,11 +40,11 @@ public class MainActivity extends FragmentActivity implements GoogleApiClient.Co
     private FirebaseAuth mFirebaseAuth;
     private GoogleApiClient mGoogleApiClient;
     private static final Uri SuppliersProviderUri = Uri.parse("content://com.zaks.ayala.provider.suppliers/items");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        NotificationManager.startNotificationService(this);
         mFirebaseAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -51,6 +54,7 @@ public class MainActivity extends FragmentActivity implements GoogleApiClient.Co
                 .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
                 .build();
+
     }
 
 
@@ -60,6 +64,7 @@ public class MainActivity extends FragmentActivity implements GoogleApiClient.Co
             startActivity(i);
         } else {
             Intent i = new Intent(this, SettingActivity.class);
+            i.putExtra(SettingActivity.extra_IsFirst,true);
             startActivity(i);
         }
     }
@@ -74,7 +79,9 @@ public class MainActivity extends FragmentActivity implements GoogleApiClient.Co
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
+        ProgressDialog progress = new ProgressDialog(MainActivity.this);
+        progress.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+        progress.show();
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
@@ -83,7 +90,8 @@ public class MainActivity extends FragmentActivity implements GoogleApiClient.Co
                 GoogleSignInAccount account = result.getSignInAccount();
                 firebaseAuthWithGoogle(account);
             } else {
-
+                Toast.makeText(MainActivity.this, "Authentication failed.",
+                        Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -111,7 +119,6 @@ public class MainActivity extends FragmentActivity implements GoogleApiClient.Co
         if (supplier != null)
         {
             Intent i = new Intent(MainActivity.this, SupplierDealsListActivity.class);
-            i.putExtra("supplierEmail",email);
             startActivity(i);
             finish();
         }

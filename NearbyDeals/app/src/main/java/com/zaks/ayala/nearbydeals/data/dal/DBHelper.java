@@ -6,11 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.location.Address;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+
 import com.zaks.ayala.nearbydeals.bl.services.DealIntentService;
 import com.zaks.ayala.nearbydeals.bl.services.SupplierIntentService;
 import com.zaks.ayala.nearbydeals.common.Utilities;

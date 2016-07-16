@@ -18,4 +18,10 @@
     <dimen name="card_sub_text">14sp</dimen>
     <dimen name="card_image_size">112dp</dimen>
     <dimen name="card_text_top_padding">8dp</dimen>
+    <dimen name="toolbar_button_size">24px</dimen>
+
+    <dimen name="item_card_image_height">168dp</dimen>
+    <dimen name="item_card_icon_margin">-32dp</dimen>
+    <dimen name="item_card_content_padding">20dp</dimen>
+<dimen name="settings_toolbar_margin_minus">-48dp</dimen>
 </resources>

@@ -3,7 +3,9 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
     <Button
-        style="@style/AppTheme.Button.Big"
+        style="@style/AppTheme.Button"
+        android:layout_gravity="right"
         android:id="@+id/preferences_activity_next_button"
-        android:text="@string/preferences_activity_next"/>
+        android:text="@string/preferences_activity_next"
+        android:layout_marginTop="@dimen/card_text_top_padding"/>
 </LinearLayout>

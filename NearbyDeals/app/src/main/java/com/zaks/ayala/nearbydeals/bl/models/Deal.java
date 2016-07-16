@@ -122,20 +122,20 @@ public class Deal implements Serializable {
     public static Deal fromCursor(Cursor cursor) {
         Deal deal = new Deal();
 
-        deal.setId(cursor.getInt(cursor.getColumnIndex(DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_ID))));
-        deal.setDescription(cursor.getString(cursor.getColumnIndex(DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_Description))));
-        deal.setAddress(cursor.getString(cursor.getColumnIndex(DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_Address))));
-        deal.setFromDate(Utilities.getDateFromString(cursor.getString(cursor.getColumnIndex(DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_FromDate)))));
-        deal.setToDate(Utilities.getDateFromString(cursor.getString(cursor.getColumnIndex(DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_ToDate)))));
-        deal.setLatitude(cursor.getDouble(cursor.getColumnIndex(DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_Latitude))));
-        deal.setLongitude(cursor.getDouble(cursor.getColumnIndex(DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_Longitude))));
-        deal.setSupplierName(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Name))));
-        deal.setSupplierEmail(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Email))));
-        deal.setSupplierPhone(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Phone))));
+        deal.setId(cursor.getInt(cursor.getColumnIndex(DealsContract.DealEntry.Column_ID)));
+        deal.setDescription(cursor.getString(cursor.getColumnIndex(DealsContract.DealEntry.Column_Description)));
+        deal.setAddress(cursor.getString(cursor.getColumnIndex(DealsContract.DealEntry.Column_Address)));
+        deal.setFromDate(Utilities.getDateFromString(cursor.getString(cursor.getColumnIndex(DealsContract.DealEntry.Column_FromDate))));
+        deal.setToDate(Utilities.getDateFromString(cursor.getString(cursor.getColumnIndex(DealsContract.DealEntry.Column_ToDate))));
+        deal.setLatitude(cursor.getDouble(cursor.getColumnIndex(DealsContract.DealEntry.Column_Latitude)));
+        deal.setLongitude(cursor.getDouble(cursor.getColumnIndex(DealsContract.DealEntry.Column_Longitude)));
+        deal.setSupplierName(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Name)));
+        deal.setSupplierEmail(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Email)));
+        deal.setSupplierPhone(cursor.getString(cursor.getColumnIndex(SuppliersContract.SupplierEntry.Column_Phone)));
         Category category = new Category(
-                cursor.getInt(cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_ID))),
-                cursor.getString(cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Description))),
-                cursor.getString(cursor.getColumnIndex(CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Color))));
+                cursor.getInt(cursor.getColumnIndex(CategoriesContract.CategoryEntry.Column_ID)),
+                cursor.getString(cursor.getColumnIndex(CategoriesContract.CategoryEntry.Column_Description)),
+                cursor.getString(cursor.getColumnIndex(CategoriesContract.CategoryEntry.Column_Color)));
         deal.setCategory(category);
 
         return deal;
@@ -143,19 +143,19 @@ public class Deal implements Serializable {
 
     public static String[] getProjectionMap() {
         return new String[]{
-                DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_ID),
-                DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_Description),
-                DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_Address),
-                DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_FromDate),
-                DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_ToDate),
-                DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_Latitude),
-                DealsContract.DealEntry.addPrefix(DealsContract.DealEntry.Column_Longitude),
-                SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Name),
-                SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Email),
-                SuppliersContract.SupplierEntry.addPrefix(SuppliersContract.SupplierEntry.Column_Phone),
-                CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Description),
-                CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_Color),
-                CategoriesContract.CategoryEntry.addPrefix(CategoriesContract.CategoryEntry.Column_ID)
+                DealsContract.DealEntry.Column_ID,
+                DealsContract.DealEntry.Column_Description,
+                DealsContract.DealEntry.Column_Address,
+                DealsContract.DealEntry.Column_FromDate,
+                DealsContract.DealEntry.Column_ToDate,
+                DealsContract.DealEntry.Column_Latitude,
+                DealsContract.DealEntry.Column_Longitude,
+                SuppliersContract.SupplierEntry.Column_Name,
+                SuppliersContract.SupplierEntry.Column_Email,
+                SuppliersContract.SupplierEntry.Column_Phone,
+                CategoriesContract.CategoryEntry.Column_Description,
+                CategoriesContract.CategoryEntry.Column_Color,
+                CategoriesContract.CategoryEntry.Column_ID
         };
     }
 

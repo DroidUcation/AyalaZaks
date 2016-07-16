@@ -8,18 +8,15 @@
         <item name="colorPrimaryDark">@color/primary_dark</item>
         <!--   theme UI controls like checkboxes and text fields -->
         <item name="colorAccent">@color/accent</item>
-        <item name="android:background">#ffffff</item>
+        <!--<item name="android:background">#ffffff</item>-->
     </style>
 
     <style name="AppTheme" parent="AppTheme.Base">
-        <item name="android:actionBarStyle">@style/AppTheme.ActionBar</item>
+
         <item name="android:windowContentTransitions">true</item>
     </style>
 
-    <style name="AppTheme.ActionBar" parent="Widget.AppCompat.Light.ActionBar">
-        <item name="android:background">@color/primary</item>
 
-    </style>
 
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
         <item name="android:layout_width">wrap_content</item>
@@ -55,6 +52,7 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:textSize">@dimen/header_font</item>
         <item name="android:textColor">@color/primary</item>
+
         <!--<item name="android:layout_marginTop">@dimen/field_space</item>-->
     </style>
 
@@ -66,4 +64,8 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">@drawable/splash_screen</item>
+    </style>
 </resources>

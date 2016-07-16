@@ -10,7 +10,7 @@ public final class SuppliersContract {
 
     public  static  abstract class SupplierEntry implements BaseColumns {
         public static final String TableName = "Suppliers";
-        public static final String Column_ID = "ID";
+        public static final String Column_ID = "ID_Suppliers";
         public static final String Column_Name = "Name";
         public static final String Column_Email = "Email";
         public static final String Column_Phone= "Phone";
