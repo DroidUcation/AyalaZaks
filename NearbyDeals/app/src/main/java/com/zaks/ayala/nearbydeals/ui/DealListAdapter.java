@@ -66,7 +66,7 @@ public class DealListAdapter extends CursorRecyclerViewAdapter<DealListAdapter.V
         final Deal deal = Deal.fromCursor(cursor);
         viewHolder.description.setText(deal.getDescription());
         viewHolder.address.setText(deal.getAddress());
-       viewHolder.supplierName.setText(deal.getSupplierName());
+        viewHolder.supplierName.setText(deal.getSupplierName());
         viewHolder.image.setImageResource(Utilities.getCategoryIcon(deal.getCategory().getDescription()));
         viewHolder.card.setOnClickListener(new View.OnClickListener() {
             @Override

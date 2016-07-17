@@ -21,8 +21,6 @@
                 android:id="@+id/deal_popup_image"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/item_card_image_height"
-                android:background="#ff9800"
-
                 ></RelativeLayout>
 
             <ImageView

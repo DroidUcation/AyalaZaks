@@ -1,5 +1,6 @@
 package com.zaks.ayala.nearbydeals.ui;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -10,8 +11,10 @@ import android.support.v7.widget.CardView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.zaks.ayala.nearbydeals.R;
@@ -29,7 +32,14 @@ public class DealItemFragment extends DialogFragment {
         return dealItem;
     }
 
+    @Override
+    public Dialog onCreateDialog(Bundle savedInstanceState) {
+        Dialog dialog = super.onCreateDialog(savedInstanceState);
 
+        // request a window without the title
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        return dialog;
+    }
     public DealItemFragment() {
         // Required empty public constructor
     }
@@ -58,11 +68,11 @@ public class DealItemFragment extends DialogFragment {
             TextView address = (TextView) v.findViewById(R.id.deal_popup_address);
             TextView phone = (TextView) v.findViewById(R.id.deal_popup_supplier_phone);
             TextView email = (TextView) v.findViewById(R.id.deal_popup_supplier_email);
-            CardView card = (CardView) v.findViewById(R.id.deal_popup_card);
+            RelativeLayout card = (RelativeLayout) v.findViewById(R.id.deal_popup_image);
             LinearLayout addressBlock = (LinearLayout) v.findViewById(R.id.deal_popup_address_block);
             LinearLayout phoneBlock = (LinearLayout) v.findViewById(R.id.deal_popup_phone_block);
             LinearLayout emailBlock = (LinearLayout) v.findViewById(R.id.deal_popup_email_block);
-            card.setBackgroundColor(Utilities.getCategoryBackground(theDeal.getCategory().getDescription()));
+            card.setBackgroundResource(Utilities.getCategoryBackground(theDeal.getCategory().getDescription()));
             icon.setImageResource(Utilities.getCategoryIcon(theDeal.getCategory().getDescription()));
             desc.setText(theDeal.getDescription());
             supplierName.setText(theDeal.getSupplierName());
@@ -87,10 +97,11 @@ public class DealItemFragment extends DialogFragment {
                     startActivity(intent);
                 }
             });
-            email.setOnClickListener(new View.OnClickListener() {
+            emailBlock.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    Intent i=new Intent(Intent.ACTION_SENDTO,Uri.parse("mailto:"+theDeal.getSupplierEmail()));
+                    startActivity(i);
                 }
             });
 

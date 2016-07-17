@@ -25,10 +25,8 @@ import com.zaks.ayala.nearbydeals.data.datacontracts.CategoriesContract;
 import com.zaks.ayala.nearbydeals.data.datacontracts.DealsContract;
 import com.zaks.ayala.nearbydeals.data.datacontracts.SuppliersContract;
 
-public class SupplierDealsListActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class SupplierDealsListActivity extends AppCompatActivity {
 
-    private static final int DealsLoaderId = 1;
-    private static final Uri DealsProviderUri = Uri.parse("content://com.zaks.ayala.provider.deals/items");
 
     SupplierDealsListFragment fragment;
     Supplier currSupplier;
@@ -57,7 +55,7 @@ public class SupplierDealsListActivity extends AppCompatActivity implements Load
 //
             }
         });
-        getSupportLoaderManager().initLoader(DealsLoaderId, null, this);
+
         fragment = (SupplierDealsListFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_deals_list);
     }
 
@@ -72,19 +70,5 @@ public class SupplierDealsListActivity extends AppCompatActivity implements Load
     }
 
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-        String selection = DealsContract.DealEntry.Column_SupplierID + " = " + currSupplier.getId();
-        return new CursorLoader(this, DealsProviderUri, Deal.getProjectionMap(), selection, null, DealsContract.DealEntry.Column_FromDate);
-    }
 
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        fragment.setCursorAdapter(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
-    }
 }

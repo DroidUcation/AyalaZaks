@@ -25,12 +25,11 @@ import com.zaks.ayala.nearbydeals.data.datacontracts.DealsContract;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DealsActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
+public class DealsActivity extends AppCompatActivity  {
     private Toolbar toolbar;
     private TabLayout tabLayout;
     private ViewPager viewPager;
-    private static final int DealsLoaderId = 1;
-    private static final Uri DealsProviderUri = Uri.parse("content://com.zaks.ayala.provider.deals/items");
+
     DealListFragment fragment;
 
     @Override
@@ -48,7 +47,7 @@ public class DealsActivity extends AppCompatActivity implements LoaderManager.Lo
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);
 
-        getSupportLoaderManager().initLoader(DealsLoaderId, null, this);
+
 
     }
 
@@ -104,21 +103,6 @@ public class DealsActivity extends AppCompatActivity implements LoaderManager.Lo
         }
     }
 
-    @Override
-    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
 
-        return new CursorLoader(this, DealsProviderUri, Deal.getProjectionMap(), null, null, DealsContract.DealEntry.Column_FromDate);
-    }
-
-    @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-
-        fragment.setCursorAdapter(data);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-
-    }
 
 }
