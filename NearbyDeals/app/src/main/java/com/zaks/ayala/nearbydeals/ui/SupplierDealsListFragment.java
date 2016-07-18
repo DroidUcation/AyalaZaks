@@ -42,8 +42,9 @@ public class SupplierDealsListFragment extends Fragment  implements LoaderManage
         dealsRecyclerView.setHasFixedSize(true);
         final RecyclerView.LayoutManager dealsLayoutManager = new LinearLayoutManager(getContext());
         dealsRecyclerView.setLayoutManager(dealsLayoutManager);
-        getActivity().getSupportLoaderManager().initLoader(DealsLoaderId, null, this);
         getSupplier();
+        getActivity().getSupportLoaderManager().initLoader(DealsLoaderId, null, this);
+
         return view;
     }
 
